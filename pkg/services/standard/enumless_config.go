@@ -9,5 +9,6 @@ type EnumlessConfig struct{}
 
 // Enums returns an empty map
 func (ec *EnumlessConfig) Enums() map[string]types.EnumFormatter {
-	return map[string]types.EnumFormatter{}
+	_ = "STUB: not implemented"
+	return nil
 }

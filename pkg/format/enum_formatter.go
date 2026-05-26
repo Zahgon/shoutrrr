@@ -1,8 +1,6 @@
 package format
 
 import (
-	"strings"
-
 	"github.com/containrrr/shoutrrr/pkg/types"
 )
 
@@ -17,48 +15,16 @@ type EnumFormatter struct {
 }
 
 // Names is the list of the valid Enum string values
-func (ef EnumFormatter) Names() []string {
-	return ef.names[ef.firstOffset:]
-}
+func (ef EnumFormatter) Names() []string { _ = "STUB: not implemented"; return nil }
 
 // Print takes a enum mapped int and returns it's string representation or "Invalid"
-func (ef EnumFormatter) Print(e int) string {
-	if e >= len(ef.names) || e < 0 {
-		return "Invalid"
-	}
-	return ef.names[e]
-}
+func (ef EnumFormatter) Print(e int) string { _ = "STUB: not implemented"; return "" }
 
 // Parse takes an enum mapped string and returns it's int representation or EnumInvalid (-1)
-func (ef EnumFormatter) Parse(s string) int {
-	target := strings.ToLower(s)
-	for index, name := range ef.names {
-		if target == strings.ToLower(name) {
-			return index
-		}
-	}
-	if index, found := ef.aliases[s]; found {
-		return index
-	}
-	return EnumInvalid
-}
+func (ef EnumFormatter) Parse(s string) int { _ = "STUB: not implemented"; return 0 }
 
 // CreateEnumFormatter creates a EnumFormatter struct
 func CreateEnumFormatter(names []string, optAliases ...map[string]int) types.EnumFormatter {
-	aliases := map[string]int{}
-	if len(optAliases) > 0 {
-		aliases = optAliases[0]
-	}
-	firstOffset := 0
-	for i, name := range names {
-		if name != "" {
-			firstOffset = i
-			break
-		}
-	}
-	return &EnumFormatter{
-		names,
-		firstOffset,
-		aliases,
-	}
+	_ = "STUB: not implemented"
+	return *new(types.EnumFormatter)
 }

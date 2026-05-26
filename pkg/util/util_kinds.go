@@ -5,21 +5,13 @@ import (
 )
 
 // IsUnsignedInt is a check against the unsigned integer types
-func IsUnsignedInt(kind reflect.Kind) bool {
-	return kind >= reflect.Uint && kind <= reflect.Uint64
-}
+func IsUnsignedInt(kind reflect.Kind) bool { _ = "STUB: not implemented"; return false }
 
 // IsSignedInt is a check against the signed decimal types
-func IsSignedInt(kind reflect.Kind) bool {
-	return kind >= reflect.Int && kind <= reflect.Int64
-}
+func IsSignedInt(kind reflect.Kind) bool { _ = "STUB: not implemented"; return false }
 
 // IsCollection is a check against slice and array
-func IsCollection(kind reflect.Kind) bool {
-	return kind == reflect.Slice || kind == reflect.Array
-}
+func IsCollection(kind reflect.Kind) bool { _ = "STUB: not implemented"; return false }
 
 // IsNumeric returns whether the Kind is one of the numeric ones
-func IsNumeric(kind reflect.Kind) bool {
-	return kind >= reflect.Int && kind <= reflect.Complex128
-}
+func IsNumeric(kind reflect.Kind) bool { _ = "STUB: not implemented"; return false }

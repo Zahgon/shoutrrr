@@ -1,7 +1,5 @@
 package gotify
 
-import "fmt"
-
 // messageRequest is the actual payload being sent to the Gotify API
 type messageRequest struct {
 	Message  string `json:"message"`
@@ -22,6 +20,4 @@ type errorResponse struct {
 	Description string `json:"errorDescription"`
 }
 
-func (er *errorResponse) Error() string {
-	return fmt.Sprintf("server respondend with %v (%v): %v", er.Name, er.Code, er.Description)
-}
+func (er *errorResponse) Error() string { _ = "STUB: not implemented"; return "" }

@@ -1,10 +1,6 @@
 package jsonclient
 
 import (
-	"bytes"
-	"encoding/json"
-	"fmt"
-	"io/ioutil"
 	"net/http"
 )
 
@@ -15,13 +11,12 @@ const ContentType = "application/json"
 var DefaultClient = NewClient()
 
 // Get fetches url using GET and unmarshals into the passed response using DefaultClient
-func Get(url string, response interface{}) error {
-	return DefaultClient.Get(url, response)
-}
+func Get(url string, response interface{}) error { _ = "STUB: not implemented"; return nil }
 
 // Post sends request as JSON and unmarshals the response JSON into the supplied struct using DefaultClient
 func Post(url string, request interface{}, response interface{}) error {
-	return DefaultClient.Post(url, request, response)
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // Client is a JSON wrapper around http.Client
@@ -32,99 +27,38 @@ type client struct {
 }
 
 // NewClient returns a new JSON Client using the default http.Client
-func NewClient() Client {
-	return NewWithHTTPClient(http.DefaultClient)
-}
+func NewClient() Client { _ = "STUB: not implemented"; return *new(Client) }
 
 // NewWithHTTPClient returns a new JSON Client using the specified http.Client
 func NewWithHTTPClient(httpClient *http.Client) Client {
-	return &client{
-		httpClient: httpClient,
-		headers: http.Header{
-			"Content-Type": []string{ContentType},
-		},
-	}
+	_ = "STUB: not implemented"
+	return *new(Client)
 }
 
 // Headers return the default headers for requests
 func (c *client) Headers() http.Header {
-	return c.headers
+	_ = "STUB: not implemented"
+
+	// Get fetches url using GET and unmarshals into the passed response
+	return *new(http.Header)
 }
 
-// Get fetches url using GET and unmarshals into the passed response
-func (c *client) Get(url string, response interface{}) error {
-	res, err := c.httpClient.Get(url)
-	if err != nil {
-		return err
-	}
-
-	return parseResponse(res, response)
-}
+func (c *client) Get(url string, response interface{}) error { _ = "STUB: not implemented"; return nil }
 
 // Post sends request as JSON and unmarshals the response JSON into the supplied struct
 func (c *client) Post(url string, request interface{}, response interface{}) error {
-	var err error
-	var body []byte
-
-	if strReq, ok := request.(string); ok {
-		// If the request is a string, just pass it through without serializing
-		body = []byte(strReq)
-	} else {
-		body, err = json.MarshalIndent(request, "", c.indent)
-		if err != nil {
-			return fmt.Errorf("error creating payload: %w", err)
-		}
-	}
-
-	req, err := http.NewRequest(http.MethodPost, url, bytes.NewReader(body))
-	if err != nil {
-		return fmt.Errorf("error creating request: %w", err)
-	}
-
-	for key, val := range c.headers {
-		req.Header.Set(key, val[0])
-	}
-
-	var res *http.Response
-	res, err = c.httpClient.Do(req)
-	if err != nil {
-		return fmt.Errorf("error sending payload: %w", err)
-	}
-
-	return parseResponse(res, response)
+	_ = "STUB: not implemented"
+	return nil
 }
 
-func (c *client) ErrorResponse(err error, response interface{}) bool {
-	jerr, isJsonError := err.(Error)
-	if !isJsonError {
-		return false
-	}
+// If the request is a string, just pass it through without serializing
 
-	return json.Unmarshal([]byte(jerr.Body), response) == nil
+func (c *client) ErrorResponse(err error, response interface{}) bool {
+	_ = "STUB: not implemented"
+	return false
 }
 
 func parseResponse(res *http.Response, response interface{}) error {
-	defer res.Body.Close()
-	body, err := ioutil.ReadAll(res.Body)
-
-	if res.StatusCode >= 400 {
-		err = fmt.Errorf("got HTTP %v", res.Status)
-	}
-
-	if err == nil {
-		err = json.Unmarshal(body, response)
-	}
-
-	if err != nil {
-		if body == nil {
-			body = []byte{}
-		}
-		return Error{
-			StatusCode: res.StatusCode,
-			Body:       string(body),
-			err:        err,
-		}
-	}
-
+	_ = "STUB: not implemented"
 	return nil
 }

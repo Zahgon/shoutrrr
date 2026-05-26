@@ -41,6 +41,4 @@ var Priority = &priorityVals{
 		}),
 }
 
-func (p priority) String() string {
-	return Priority.Enum.Print(int(p))
-}
+func (p priority) String() string { _ = "STUB: not implemented"; return "" }

@@ -25,74 +25,38 @@ type Config struct {
 
 // DefaultConfig creates a PropKeyResolver and uses it to populate the default values of a new Config, returning both
 func DefaultConfig() (*Config, format.PropKeyResolver) {
-	config := &Config{}
-	pkr := format.NewPropKeyResolver(config)
-	_ = pkr.SetDefaultProps(config)
-	return config, pkr
+	_ = "STUB: not implemented"
+	return nil, *new(format.PropKeyResolver)
 }
 
 // ConfigFromWebhookURL creates a new Config from a parsed Webhook URL
 func ConfigFromWebhookURL(webhookURL url.URL) (*Config, format.PropKeyResolver, error) {
-	config, pkr := DefaultConfig()
-
-	config.webhookURL = &webhookURL
-	// TODO: Decide what to do with custom URL queries. Right now they are passed
-	//       to the inner url.URL and not processed by PKR.
-	// customQuery, err := format.SetConfigPropsFromQuery(&pkr, webhookURL.Query())
-	// goland:noinspection GoNilness: SetConfigPropsFromQuery always return non-nil
-	// config.webhookURL.RawQuery = customQuery.Encode()
-	config.DisableTLS = webhookURL.Scheme == "http"
-	return config, pkr, nil
+	_ = "STUB: not implemented"
+	return nil, *new(format.PropKeyResolver), nil
 }
+
+// TODO: Decide what to do with custom URL queries. Right now they are passed
+//       to the inner url.URL and not processed by PKR.
+// customQuery, err := format.SetConfigPropsFromQuery(&pkr, webhookURL.Query())
+// goland:noinspection GoNilness: SetConfigPropsFromQuery always return non-nil
+// config.webhookURL.RawQuery = customQuery.Encode()
 
 // WebhookURL returns a url.URL that is synchronized with the config props
-func (config *Config) WebhookURL() *url.URL {
-	webhookURL := *config.webhookURL
-	webhookURL.Scheme = DefaultWebhookScheme
-	if config.DisableTLS {
-		webhookURL.Scheme = webhookURL.Scheme[:4]
-	}
-	return &webhookURL
-}
+func (config *Config) WebhookURL() *url.URL { _ = "STUB: not implemented"; return nil }
 
 // GetURL returns a URL representation of its current field values
-func (config *Config) GetURL() *url.URL {
-	resolver := format.NewPropKeyResolver(config)
-	return config.getURL(&resolver)
-}
+func (config *Config) GetURL() *url.URL { _ = "STUB: not implemented"; return nil }
 
 // SetURL updates a ServiceConfig from a URL representation of its field values
-func (config *Config) SetURL(serviceURL *url.URL) error {
-	resolver := format.NewPropKeyResolver(config)
-	return config.setURL(&resolver, serviceURL)
-}
+func (config *Config) SetURL(serviceURL *url.URL) error { _ = "STUB: not implemented"; return nil }
 
 func (config *Config) getURL(resolver t.ConfigQueryResolver) *url.URL {
-
-	serviceURL := *config.webhookURL
-	webhookQuery := config.webhookURL.Query()
-	serviceQuery := format.BuildQueryWithCustomFields(resolver, webhookQuery)
-	appendCustomQueryValues(serviceQuery, config.headers, config.extraData)
-	serviceURL.RawQuery = serviceQuery.Encode()
-	serviceURL.Scheme = Scheme
-
-	return &serviceURL
+	_ = "STUB: not implemented"
+	return nil
 }
 
 func (config *Config) setURL(resolver t.ConfigQueryResolver, serviceURL *url.URL) error {
-
-	webhookURL := *serviceURL
-	serviceQuery := serviceURL.Query()
-	headers, extraData := stripCustomQueryValues(serviceQuery)
-	customQuery, err := format.SetConfigPropsFromQuery(resolver, serviceQuery)
-	if err != nil {
-		return err
-	}
-	webhookURL.RawQuery = customQuery.Encode()
-	config.webhookURL = &webhookURL
-	config.headers = headers
-	config.extraData = extraData
-
+	_ = "STUB: not implemented"
 	return nil
 }
 

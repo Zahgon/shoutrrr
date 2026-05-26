@@ -1,9 +1,6 @@
 package ifttt
 
 import (
-	"bytes"
-	"fmt"
-	"net/http"
 	"net/url"
 
 	"github.com/containrrr/shoutrrr/pkg/format"
@@ -25,56 +22,20 @@ type Service struct {
 
 // Initialize loads ServiceConfig from configURL and sets logger for this Service
 func (service *Service) Initialize(configURL *url.URL, logger types.StdLogger) error {
-	service.Logger.SetLogger(logger)
-	service.config = &Config{
-		UseMessageAsValue: 2,
-	}
-	service.pkr = format.NewPropKeyResolver(service.config)
-	if err := service.config.setURL(&service.pkr, configURL); err != nil {
-		return err
-	}
-
+	_ = "STUB: not implemented"
 	return nil
 }
 
 // Send a notification message to a IFTTT webhook
 func (service *Service) Send(message string, params *types.Params) error {
-	config := service.config
-	if err := service.pkr.UpdateConfigFromParams(config, params); err != nil {
-		return err
-	}
-
-	payload, err := createJSONToSend(config, message, params)
-	fmt.Printf("%+v", payload)
-	if err != nil {
-		return err
-	}
-	for _, event := range config.Events {
-		apiURL := service.createAPIURLForEvent(event)
-		err := doSend(payload, apiURL)
-		if err != nil {
-			return fmt.Errorf("failed to send IFTTT event \"%s\": %s", event, err)
-		}
-	}
+	_ = "STUB: not implemented"
 	return nil
 }
 
 // CreateAPIURLForEvent creates a IFTTT webhook URL for the given event
 func (service *Service) createAPIURLForEvent(event string) string {
-	return fmt.Sprintf(
-		apiURLFormat,
-		event,
-		service.config.WebHookID,
-	)
+	_ = "STUB: not implemented"
+	return ""
 }
 
-func doSend(payload []byte, postURL string) error {
-	res, err := http.Post(postURL, "application/json", bytes.NewBuffer(payload))
-	if err != nil {
-		return err
-	}
-	if res.StatusCode > 299 || res.StatusCode < 200 {
-		return fmt.Errorf("got response status code %s", res.Status)
-	}
-	return nil
-}
+func doSend(payload []byte, postURL string) error { _ = "STUB: not implemented"; return nil }

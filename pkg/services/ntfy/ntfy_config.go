@@ -2,9 +2,7 @@ package ntfy
 
 import (
 	"net/url"
-	"strings"
 
-	"github.com/containrrr/shoutrrr/pkg/format"
 	"github.com/containrrr/shoutrrr/pkg/types"
 )
 
@@ -31,77 +29,28 @@ type Config struct {
 }
 
 // Enums implements types.ServiceConfig
-func (*Config) Enums() map[string]types.EnumFormatter {
-	return map[string]types.EnumFormatter{
-		"Priority": Priority.Enum,
-	}
-}
+func (*Config) Enums() map[string]types.EnumFormatter { _ = "STUB: not implemented"; return nil }
 
 // GetURL returns a URL representation of it's current field values
-func (config *Config) GetURL() *url.URL {
-	resolver := format.NewPropKeyResolver(config)
-	return config.getURL(&resolver)
-}
+func (config *Config) GetURL() *url.URL { _ = "STUB: not implemented"; return nil }
 
 // SetURL updates a ServiceConfig from a URL representation of it's field values
-func (config *Config) SetURL(url *url.URL) error {
-	resolver := format.NewPropKeyResolver(config)
-	return config.setURL(&resolver, url)
-}
+func (config *Config) SetURL(url *url.URL) error { _ = "STUB: not implemented"; return nil }
 
 // GetAPIURL returns the API URL corresponding to the passed endpoint based on the configuration
-func (config *Config) GetAPIURL() string {
-
-	path := config.Topic
-	if !strings.HasPrefix(config.Topic, "/") {
-		path = "/" + path
-	}
-
-	var creds *url.Userinfo
-	if config.Password != "" {
-		creds = url.UserPassword(config.Username, config.Password)
-	}
-
-	apiURL := url.URL{
-		Scheme: config.Scheme,
-		Host:   config.Host,
-		Path:   path,
-		User:   creds,
-	}
-	return apiURL.String()
-}
+func (config *Config) GetAPIURL() string { _ = "STUB: not implemented"; return "" }
 
 func (config *Config) getURL(resolver types.ConfigQueryResolver) *url.URL {
-	return &url.URL{
-		User:       url.UserPassword(config.Username, config.Password),
-		Host:       config.Host,
-		Scheme:     Scheme,
-		ForceQuery: true,
-		Path:       config.Topic,
-		RawQuery:   format.BuildQuery(resolver),
-	}
-
+	_ = "STUB: not implemented"
+	return nil
 }
 
 func (config *Config) setURL(resolver types.ConfigQueryResolver, url *url.URL) error {
-
-	password, _ := url.User.Password()
-	config.Password = password
-	config.Username = url.User.Username()
-	config.Host = url.Host
-	config.Topic = strings.TrimPrefix(url.Path, "/")
-
-	// Escape raw `;` in queries
-	url.RawQuery = strings.ReplaceAll(url.RawQuery, ";", "%3b")
-
-	for key, vals := range url.Query() {
-		if err := resolver.Set(key, vals[0]); err != nil {
-			return err
-		}
-	}
-
+	_ = "STUB: not implemented"
 	return nil
 }
+
+// Escape raw `;` in queries
 
 // Scheme is the identifying part of this service's configuration URL
 const (

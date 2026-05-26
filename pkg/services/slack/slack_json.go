@@ -2,7 +2,6 @@ package slack
 
 import (
 	"regexp"
-	"strings"
 )
 
 // MessagePayload used within the Slack service
@@ -20,18 +19,7 @@ type MessagePayload struct {
 var iconURLPattern = regexp.MustCompile(`https?://`)
 
 // SetIcon sets the appropriate icon field in the payload based on whether the input is a URL or not
-func (p *MessagePayload) SetIcon(icon string) {
-	p.IconURL = ""
-	p.IconEmoji = ""
-
-	if icon != "" {
-		if iconURLPattern.MatchString(icon) {
-			p.IconURL = icon
-		} else {
-			p.IconEmoji = icon
-		}
-	}
-}
+func (p *MessagePayload) SetIcon(icon string) { _ = "STUB: not implemented"; return }
 
 type block struct {
 	Type string    `json:"type"`
@@ -71,38 +59,11 @@ type APIResponse struct {
 
 // CreateJSONPayload compatible with the slack post message API
 func CreateJSONPayload(config *Config, message string) interface{} {
-
-	var atts []attachment
-	for i, line := range strings.Split(message, "\n") {
-		// When 100 attachments have been reached, append the remaining line to the last
-		// attachment to prevent reaching the slack API limit
-		if i >= 100 {
-			atts[len(atts)-1].Text += "\n" + line
-			continue
-		}
-		atts = append(atts, attachment{
-			Text:  line,
-			Color: config.Color,
-		})
-	}
-
-	// Remove last attachment if empty
-	if atts[len(atts)-1].Text == "" {
-		atts = atts[:len(atts)-1]
-	}
-
-	payload := MessagePayload{
-		ThreadTS:    config.ThreadTS,
-		Text:        config.Title,
-		BotName:     config.BotName,
-		Attachments: atts,
-	}
-
-	payload.SetIcon(config.Icon)
-
-	if config.Channel != "webhook" {
-		payload.Channel = config.Channel
-	}
-
-	return payload
+	_ = "STUB: not implemented"
+	return nil
 }
+
+// When 100 attachments have been reached, append the remaining line to the last
+// attachment to prevent reaching the slack API limit
+
+// Remove last attachment if empty

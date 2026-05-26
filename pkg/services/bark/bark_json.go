@@ -20,6 +20,4 @@ type apiResponse struct {
 	Timestamp int64  `json:"timestamp"`
 }
 
-func (e *apiResponse) Error() string {
-	return "server response: " + e.Message
-}
+func (e *apiResponse) Error() string { _ = "STUB: not implemented"; return "" }

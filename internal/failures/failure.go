@@ -1,7 +1,5 @@
 package failures
 
-import "fmt"
-
 // FailureID is a number to be used to identify a specific error
 type FailureID int
 
@@ -17,38 +15,18 @@ type Failure interface {
 	ID() FailureID
 }
 
-func (f *failure) Error() string {
-	if f.wrapped == nil {
-		return f.message
-	}
-	return fmt.Sprintf("%s: %v", f.message, f.wrapped)
-}
+func (f *failure) Error() string { _ = "STUB: not implemented"; return "" }
 
-func (f *failure) Unwrap() error {
-	return f.wrapped
-}
+func (f *failure) Unwrap() error { _ = "STUB: not implemented"; return nil }
 
-func (f *failure) ID() FailureID {
-	return f.id
-}
+func (f *failure) ID() FailureID { _ = "STUB: not implemented"; return *new(FailureID) }
 
-func (f *failure) Is(target error) bool {
-	targetFailure, targetIsFailure := target.(*failure)
-	return targetIsFailure && targetFailure.id == f.id
-}
+func (f *failure) Is(target error) bool { _ = "STUB: not implemented"; return false }
 
 // Wrap returns a failure with the given message and id, saving the message of wrappedError for appending to Error()
 func Wrap(message string, id FailureID, wrappedError error, v ...interface{}) Failure {
-
-	if len(v) > 0 {
-		message = fmt.Sprintf(message, v...)
-	}
-
-	return &failure{
-		message: message,
-		id:      id,
-		wrapped: wrappedError,
-	}
+	_ = "STUB: not implemented"
+	return *new(Failure)
 }
 
 var _ error = &failure{}

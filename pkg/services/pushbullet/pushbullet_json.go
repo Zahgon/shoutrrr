@@ -44,29 +44,9 @@ type ErrorResponse struct {
 
 var emailPattern = regexp.MustCompile(`.*@.*\..*`)
 
-func (err *ErrorResponse) Error() string {
-	return err.ErrorData.Message
-}
+func (err *ErrorResponse) Error() string { _ = "STUB: not implemented"; return "" }
 
-func (p *PushRequest) SetTarget(target string) {
-	if emailPattern.MatchString(target) {
-		p.Email = target
-		return
-	}
-
-	if len(target) > 0 && string(target[0]) == "#" {
-		p.ChannelTag = target[1:]
-		return
-	}
-
-	p.DeviceIden = target
-}
+func (p *PushRequest) SetTarget(target string) { _ = "STUB: not implemented"; return }
 
 // NewNotePush creates a new push request
-func NewNotePush(message, title string) *PushRequest {
-	return &PushRequest{
-		Type:  "note",
-		Title: title,
-		Body:  message,
-	}
-}
+func NewNotePush(message, title string) *PushRequest { _ = "STUB: not implemented"; return nil }

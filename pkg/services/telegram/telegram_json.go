@@ -1,12 +1,5 @@
 package telegram
 
-import (
-	"fmt"
-	"html"
-	"strconv"
-	"strings"
-)
-
 // SendMessagePayload is the notification payload for the telegram notification service
 type SendMessagePayload struct {
 	Text                string       `json:"text"`
@@ -35,39 +28,13 @@ type messageResponse struct {
 }
 
 func createSendMessagePayload(message string, channel string, config *Config) SendMessagePayload {
-	var threadID *int = nil
-	chatID, thread, ok := strings.Cut(channel, ":")
-	if ok {
-		if parsed, err := strconv.Atoi(thread); err == nil {
-			threadID = &parsed
-		}
-	}
-	payload := SendMessagePayload{
-		Text:                message,
-		ID:                  chatID,
-		MessageThreadID:     threadID,
-		DisableNotification: !config.Notification,
-		DisablePreview:      !config.Preview,
-	}
-
-	parseMode := config.ParseMode
-	if config.ParseMode == ParseModes.None && config.Title != "" {
-		parseMode = ParseModes.HTML
-		// no parse mode has been provided, treat message as unescaped HTML
-		message = html.EscapeString(message)
-	}
-
-	if parseMode != ParseModes.None {
-		payload.ParseMode = parseMode.String()
-	}
-
-	// only HTML parse mode is supported for titles
-	if parseMode == ParseModes.HTML {
-		payload.Text = fmt.Sprintf("<b>%v</b>\n%v", html.EscapeString(config.Title), message)
-	}
-
-	return payload
+	_ = "STUB: not implemented"
+	return *new(SendMessagePayload)
 }
+
+// no parse mode has been provided, treat message as unescaped HTML
+
+// only HTML parse mode is supported for titles
 
 type errorResponse struct {
 	OK          bool   `json:"ok"`
@@ -75,9 +42,7 @@ type errorResponse struct {
 	Description string `json:"description"`
 }
 
-func (e *errorResponse) Error() string {
-	return e.Description
-}
+func (e *errorResponse) Error() string { _ = "STUB: not implemented"; return "" }
 
 type userResponse struct {
 	OK     bool `json:"ok"`
@@ -173,12 +138,7 @@ type Chat struct {
 }
 
 // Name returns the name of the channel based on its type
-func (c *Chat) Name() string {
-	if c.Type == "private" || c.Type == "channel" && c.Username != "" {
-		return "@" + c.Username
-	}
-	return c.Title
-}
+func (c *Chat) Name() string { _ = "STUB: not implemented"; return "" }
 
 type inlineKey struct {
 	Text                     string `json:"text"`

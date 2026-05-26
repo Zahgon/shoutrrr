@@ -1,7 +1,6 @@
 package standard
 
 import (
-	"fmt"
 	f "github.com/containrrr/shoutrrr/internal/failures"
 )
 
@@ -18,17 +17,8 @@ const (
 
 // Failure creates a Failure instance corresponding to the provided failureID, wrapping the provided error
 func Failure(failureID f.FailureID, err error, v ...interface{}) f.Failure {
-	messages := map[int]string{
-		int(FailParseURL): "error parsing Service URL",
-		int(FailUnknown):  "an unknown error occurred",
-	}
-
-	msg := messages[int(failureID)]
-	if msg == "" {
-		msg = messages[int(FailUnknown)]
-	}
-
-	return f.Wrap(msg, failureID, err, v...)
+	_ = "STUB: not implemented"
+	return *new(f.Failure)
 }
 
 type failureLike interface {
@@ -37,8 +27,6 @@ type failureLike interface {
 
 // IsTestSetupFailure checks whether the given failure is due to the test setup being broken
 func IsTestSetupFailure(failure failureLike) (string, bool) {
-	if failure != nil && failure.ID() == FailTestSetup {
-		return fmt.Sprintf("test setup failed: %s", failure.Error()), true
-	}
+	_ = "STUB: not implemented"
 	return "", false
 }

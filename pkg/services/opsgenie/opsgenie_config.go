@@ -1,11 +1,8 @@
 package opsgenie
 
 import (
-	"fmt"
 	"net/url"
-	"strconv"
 
-	"github.com/containrrr/shoutrrr/pkg/format"
 	"github.com/containrrr/shoutrrr/pkg/types"
 )
 
@@ -32,62 +29,23 @@ type Config struct {
 }
 
 // Enums returns an empty map because the OpsGenie service doesn't use Enums
-func (config Config) Enums() map[string]types.EnumFormatter {
-	return map[string]types.EnumFormatter{}
-}
+func (config Config) Enums() map[string]types.EnumFormatter { _ = "STUB: not implemented"; return nil }
 
 // GetURL is the public version of getURL that creates a new PropKeyResolver when accessed from outside the package
-func (config *Config) GetURL() *url.URL {
-	resolver := format.NewPropKeyResolver(config)
-	return config.getURL(&resolver)
-}
+func (config *Config) GetURL() *url.URL { _ = "STUB: not implemented"; return nil }
 
 // Private version of GetURL that can use an instance of PropKeyResolver instead of rebuilding it's model from reflection
 func (config *Config) getURL(resolver types.ConfigQueryResolver) *url.URL {
-	host := ""
-	if config.Port > 0 {
-		host = fmt.Sprintf("%s:%d", config.Host, config.Port)
-	} else {
-		host = config.Host
-	}
-
-	result := &url.URL{
-		Host:     host,
-		Path:     fmt.Sprintf("/%s", config.APIKey),
-		Scheme:   Scheme,
-		RawQuery: format.BuildQuery(resolver),
-	}
-
-	return result
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // SetURL updates a ServiceConfig from a URL representation of it's field values
-func (config *Config) SetURL(url *url.URL) error {
-	resolver := format.NewPropKeyResolver(config)
-	return config.setURL(&resolver, url)
-}
+func (config *Config) SetURL(url *url.URL) error { _ = "STUB: not implemented"; return nil }
 
 // Private version of SetURL that can use an instance of PropKeyResolver instead of rebuilding it's model from reflection
 func (config *Config) setURL(resolver types.ConfigQueryResolver, url *url.URL) error {
-	config.Host = url.Hostname()
-	config.APIKey = url.Path[1:]
-
-	if url.Port() != "" {
-		port, err := strconv.ParseUint(url.Port(), 10, 16)
-		if err != nil {
-			return err
-		}
-		config.Port = uint16(port)
-	} else {
-		config.Port = 443
-	}
-
-	for key, vals := range url.Query() {
-		if err := resolver.Set(key, vals[0]); err != nil {
-			return err
-		}
-	}
-
+	_ = "STUB: not implemented"
 	return nil
 }
 

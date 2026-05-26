@@ -2,9 +2,7 @@ package bark
 
 import (
 	"net/url"
-	"strings"
 
-	"github.com/containrrr/shoutrrr/pkg/format"
 	"github.com/containrrr/shoutrrr/pkg/services/standard"
 	"github.com/containrrr/shoutrrr/pkg/types"
 )
@@ -27,63 +25,21 @@ type Config struct {
 }
 
 // GetURL returns a URL representation of it's current field values
-func (config *Config) GetURL() *url.URL {
-	resolver := format.NewPropKeyResolver(config)
-	return config.getURL(&resolver)
-}
+func (config *Config) GetURL() *url.URL { _ = "STUB: not implemented"; return nil }
 
 // SetURL updates a ServiceConfig from a URL representation of it's field values
-func (config *Config) SetURL(url *url.URL) error {
-	resolver := format.NewPropKeyResolver(config)
-	return config.setURL(&resolver, url)
-}
+func (config *Config) SetURL(url *url.URL) error { _ = "STUB: not implemented"; return nil }
 
 // GetAPIURL returns the API URL corresponding to the passed endpoint based on the configuration
-func (config *Config) GetAPIURL(endpoint string) string {
-
-	path := strings.Builder{}
-	if !strings.HasPrefix(config.Path, "/") {
-		path.WriteByte('/')
-	}
-	_, _ = path.WriteString(config.Path)
-	if !strings.HasSuffix(path.String(), "/") {
-		path.WriteByte('/')
-	}
-	path.WriteString(endpoint)
-
-	apiURL := url.URL{
-		Scheme: config.Scheme,
-		Host:   config.Host,
-		Path:   path.String(),
-	}
-	return apiURL.String()
-}
+func (config *Config) GetAPIURL(endpoint string) string { _ = "STUB: not implemented"; return "" }
 
 func (config *Config) getURL(resolver types.ConfigQueryResolver) *url.URL {
-	return &url.URL{
-		User:       url.UserPassword("", config.DeviceKey),
-		Host:       config.Host,
-		Scheme:     Scheme,
-		ForceQuery: true,
-		Path:       config.Path,
-		RawQuery:   format.BuildQuery(resolver),
-	}
-
+	_ = "STUB: not implemented"
+	return nil
 }
 
 func (config *Config) setURL(resolver types.ConfigQueryResolver, url *url.URL) error {
-
-	password, _ := url.User.Password()
-	config.DeviceKey = password
-	config.Host = url.Host
-	config.Path = url.Path
-
-	for key, vals := range url.Query() {
-		if err := resolver.Set(key, vals[0]); err != nil {
-			return err
-		}
-	}
-
+	_ = "STUB: not implemented"
 	return nil
 }
 

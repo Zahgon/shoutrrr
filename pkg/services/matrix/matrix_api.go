@@ -60,9 +60,7 @@ type apiResError struct {
 	Code    string `json:"errcode"`
 }
 
-func (e *apiResError) Error() string {
-	return e.Message
-}
+func (e *apiResError) Error() string { _ = "STUB: not implemented"; return "" }
 
 type flow struct {
 	Type flowType `json:"type"`
@@ -73,9 +71,4 @@ type identifier struct {
 	User string         `json:"user,omitempty"`
 }
 
-func newUserIdentifier(user string) (id *identifier) {
-	return &identifier{
-		Type: idTypeUser,
-		User: user,
-	}
-}
+func newUserIdentifier(user string) (id *identifier) { _ = "STUB: not implemented"; return nil }

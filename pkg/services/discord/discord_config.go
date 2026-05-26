@@ -1,11 +1,10 @@
 package discord
 
 import (
-	"errors"
-	"github.com/containrrr/shoutrrr/pkg/format"
+	"net/url"
+
 	"github.com/containrrr/shoutrrr/pkg/services/standard"
 	"github.com/containrrr/shoutrrr/pkg/types"
-	"net/url"
 )
 
 // Config is the configuration needed to send discord notifications
@@ -28,73 +27,24 @@ type Config struct {
 
 // LevelColors returns an array of colors with a MessageLevel index
 func (config *Config) LevelColors() (colors [types.MessageLevelCount]uint) {
-	colors[types.Unknown] = config.Color
-	colors[types.Error] = config.ColorError
-	colors[types.Warning] = config.ColorWarn
-	colors[types.Info] = config.ColorInfo
-	colors[types.Debug] = config.ColorDebug
-
-	return colors
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // GetURL returns a URL representation of it's current field values
-func (config *Config) GetURL() *url.URL {
-	resolver := format.NewPropKeyResolver(config)
-	return config.getURL(&resolver)
-}
+func (config *Config) GetURL() *url.URL { _ = "STUB: not implemented"; return nil }
 
 // SetURL updates a ServiceConfig from a URL representation of it's field values
-func (config *Config) SetURL(url *url.URL) error {
-	resolver := format.NewPropKeyResolver(config)
-	return config.setURL(&resolver, url)
-}
+func (config *Config) SetURL(url *url.URL) error { _ = "STUB: not implemented"; return nil }
 
 func (config *Config) getURL(resolver types.ConfigQueryResolver) (u *url.URL) {
-	u = &url.URL{
-		User:       url.User(config.Token),
-		Host:       config.WebhookID,
-		Scheme:     Scheme,
-		RawQuery:   format.BuildQuery(resolver),
-		ForceQuery: false,
-	}
-
-	if config.JSON {
-		u.Path = "/raw"
-	}
-
-	return u
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // SetURL updates a ServiceConfig from a URL representation of it's field values
 func (config *Config) setURL(resolver types.ConfigQueryResolver, url *url.URL) error {
-
-	config.WebhookID = url.Host
-	config.Token = url.User.Username()
-
-	if len(url.Path) > 0 {
-		switch url.Path {
-		case "/raw":
-			config.JSON = true
-			break
-		default:
-			return errors.New("illegal argument in config URL")
-		}
-	}
-
-	if config.WebhookID == "" {
-		return errors.New("webhook ID missing from config URL")
-	}
-
-	if len(config.Token) < 1 {
-		return errors.New("token missing from config URL")
-	}
-
-	for key, vals := range url.Query() {
-		if err := resolver.Set(key, vals[0]); err != nil {
-			return err
-		}
-	}
-
+	_ = "STUB: not implemented"
 	return nil
 }
 

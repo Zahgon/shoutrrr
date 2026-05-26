@@ -11,17 +11,10 @@ const (
 )
 
 // SetTitle sets the "title" param to the specified value
-func (p Params) SetTitle(title string) {
-	p[TitleKey] = title
-}
+func (p Params) SetTitle(title string) { _ = "STUB: not implemented"; return }
 
 // Title returns the "title" param
-func (p Params) Title() (title string, found bool) {
-	title, found = p[TitleKey]
-	return
-}
+func (p Params) Title() (title string, found bool) { _ = "STUB: not implemented"; return "", false }
 
 // SetMessage sets the "message" param to the specified value
-func (p Params) SetMessage(message string) {
-	p[MessageKey] = message
-}
+func (p Params) SetMessage(message string) { _ = "STUB: not implemented"; return }

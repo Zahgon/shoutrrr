@@ -37,19 +37,11 @@ var EncMethods = &encMethodVals{
 		}),
 }
 
-func (at encMethod) String() string {
-	return EncMethods.Enum.Print(int(at))
-}
+func (at encMethod) String() string { _ = "STUB: not implemented"; return "" }
 
 func useImplicitTLS(encryption encMethod, port uint16) bool {
-	switch encryption {
-	case EncMethods.ImplicitTLS:
-		return true
-	case EncMethods.Auto:
-		return port == ImplicitTLSPort
-	default:
-		return false
-	}
+	_ = "STUB: not implemented"
+	return false
 }
 
 // ImplicitTLSPort is de facto standard SMTPS port

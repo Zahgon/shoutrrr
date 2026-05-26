@@ -1,7 +1,6 @@
 package types
 
 import (
-	"strings"
 	"time"
 )
 
@@ -32,12 +31,7 @@ var messageLevelStrings = [MessageLevelCount]string{
 	"Error",
 }
 
-func (level MessageLevel) String() string {
-	if level >= messageLevelCount {
-		return messageLevelStrings[0]
-	}
-	return messageLevelStrings[level]
-}
+func (level MessageLevel) String() string { _ = "STUB: not implemented"; return "" }
 
 // MessageItem is an entry in a notification being sent by a service
 type MessageItem struct {
@@ -49,20 +43,10 @@ type MessageItem struct {
 
 // WithField appends the key/value pair to the message items fields
 func (mi *MessageItem) WithField(key, value string) *MessageItem {
-	mi.Fields = append(mi.Fields, Field{
-		Key:   key,
-		Value: value,
-	})
-	return mi
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // ItemsToPlain joins together the MessageItems' Text using newlines
 // Used implement the rich sender API by redirecting to the plain sender implementation
-func ItemsToPlain(items []MessageItem) string {
-	builder := strings.Builder{}
-	for _, item := range items {
-		builder.WriteString(item.Text)
-		builder.WriteRune('\n')
-	}
-	return builder.String()
-}
+func ItemsToPlain(items []MessageItem) string { _ = "STUB: not implemented"; return "" }

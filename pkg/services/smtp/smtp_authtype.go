@@ -33,6 +33,4 @@ var AuthTypes = &authTypeVals{
 		}),
 }
 
-func (at authType) String() string {
-	return AuthTypes.Enum.Print(int(at))
-}
+func (at authType) String() string { _ = "STUB: not implemented"; return "" }

@@ -1,11 +1,8 @@
 package mattermost
 
 import (
-	"errors"
 	"net/url"
-	"strings"
 
-	"github.com/containrrr/shoutrrr/pkg/format"
 	"github.com/containrrr/shoutrrr/pkg/services/standard"
 	"github.com/containrrr/shoutrrr/pkg/types"
 )
@@ -22,58 +19,13 @@ type Config struct {
 }
 
 // GetURL returns a URL representation of it's current field values
-func (config *Config) GetURL() *url.URL {
-	paths := []string{"", config.Token, config.Channel}
-	if config.Channel == "" {
-		paths = paths[:2]
-	}
-	var user *url.Userinfo
-	if config.UserName != "" {
-		user = url.User(config.UserName)
-	}
-	resolver := format.NewPropKeyResolver(config)
-	return &url.URL{
-		User:       user,
-		Host:       config.Host,
-		Path:       strings.Join(paths, "/"),
-		Scheme:     Scheme,
-		ForceQuery: false,
-		RawQuery:   format.BuildQuery(&resolver),
-	}
-}
+func (config *Config) GetURL() *url.URL { _ = "STUB: not implemented"; return nil }
 
 // SetURL updates a ServiceConfig from a URL representation of it's field values
-func (config *Config) SetURL(url *url.URL) error {
-	resolver := format.NewPropKeyResolver(config)
-	return config.setURL(&resolver, url)
-}
+func (config *Config) SetURL(url *url.URL) error { _ = "STUB: not implemented"; return nil }
 
 func (config *Config) setURL(resolver types.ConfigQueryResolver, serviceURL *url.URL) error {
-
-	config.Host = serviceURL.Host
-	if serviceURL.Path == "" || serviceURL.Path == "/" {
-		return errors.New(string(NotEnoughArguments))
-	}
-	config.UserName = serviceURL.User.Username()
-	path := strings.Split(serviceURL.Path[1:], "/")
-
-	for key, vals := range serviceURL.Query() {
-		if err := resolver.Set(key, vals[0]); err != nil {
-			return err
-		}
-	}
-
-	if len(path) < 1 {
-		return errors.New(string(NotEnoughArguments))
-	}
-
-	config.Token = path[0]
-	if len(path) > 1 {
-		if path[1] != "" {
-			config.Channel = path[1]
-		}
-	}
-
+	_ = "STUB: not implemented"
 	return nil
 }
 
@@ -89,7 +41,6 @@ const (
 
 // CreateConfigFromURL to use within the mattermost service
 func CreateConfigFromURL(serviceURL *url.URL) (*Config, error) {
-	config := Config{}
-	err := config.SetURL(serviceURL)
-	return &config, err
+	_ = "STUB: not implemented"
+	return nil, nil
 }

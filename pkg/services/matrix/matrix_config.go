@@ -3,7 +3,6 @@ package matrix
 import (
 	"net/url"
 
-	"github.com/containrrr/shoutrrr/pkg/format"
 	"github.com/containrrr/shoutrrr/pkg/services/standard"
 	t "github.com/containrrr/shoutrrr/pkg/types"
 )
@@ -24,48 +23,19 @@ type Config struct {
 }
 
 // GetURL returns a URL representation of it's current field values
-func (c *Config) GetURL() *url.URL {
-	resolver := format.NewPropKeyResolver(c)
-	return c.getURL(&resolver)
-}
+func (c *Config) GetURL() *url.URL { _ = "STUB: not implemented"; return nil }
 
 // SetURL updates a ServiceConfig from a URL representation of it's field values
-func (c *Config) SetURL(url *url.URL) error {
-	resolver := format.NewPropKeyResolver(c)
-	return c.setURL(&resolver, url)
-}
+func (c *Config) SetURL(url *url.URL) error { _ = "STUB: not implemented"; return nil }
 
 func (c *Config) getURL(resolver t.ConfigQueryResolver) *url.URL {
-	return &url.URL{
-		User:       url.UserPassword(c.User, c.Password),
-		Host:       c.Host,
-		Scheme:     Scheme,
-		ForceQuery: true,
-		RawQuery:   format.BuildQuery(resolver),
-	}
-
+	_ = "STUB: not implemented"
+	return nil
 }
 
 func (c *Config) setURL(resolver t.ConfigQueryResolver, configURL *url.URL) error {
-
-	c.DeviceID = defaultDeviceID
-	c.User = configURL.User.Username()
-	password, _ := configURL.User.Password()
-	c.Password = password
-	c.Host = configURL.Host
-
-	for key, vals := range configURL.Query() {
-		if err := resolver.Set(key, vals[0]); err != nil {
-			return err
-		}
-	}
-
-	for r, room := range c.Rooms {
-		// If room does not begin with a '#' let's prepend it
-		if room[0] != '#' && room[0] != '!' {
-			c.Rooms[r] = "#" + room
-		}
-	}
-
+	_ = "STUB: not implemented"
 	return nil
 }
+
+// If room does not begin with a '#' let's prepend it

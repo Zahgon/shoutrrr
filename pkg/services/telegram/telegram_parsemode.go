@@ -30,6 +30,4 @@ var ParseModes = &parseModeVals{
 		}),
 }
 
-func (pm parseMode) String() string {
-	return ParseModes.Enum.Print(int(pm))
-}
+func (pm parseMode) String() string { _ = "STUB: not implemented"; return "" }
